@@ -188,10 +188,11 @@ public class BusinessDashboardServices {
                 business.setBusinessTitle(business.getBusinessName());
                 business.setUsers(users);
                 business.setCreatedTime(LocalDateTime.now());
-                business.setBusinessAddress(business.getBusinessAddress());
+                //business.setBusinessAddress(business.getBusinessAddress());
                 business.setCategories(categories);
 
-                businessAddressRepository.save(business.getBusinessAddress());
+                BusinessAddress businessAddress= businessAddressRepository.save(business.getBusinessAddress());
+                business.setBusinessAddress(businessAddress);
                 businessRepository.save(business);
                 List<BusinessWorkingHours> l1 = business.getWorkingHours();
                 for (BusinessWorkingHours businessWorkingHours : l1) {
