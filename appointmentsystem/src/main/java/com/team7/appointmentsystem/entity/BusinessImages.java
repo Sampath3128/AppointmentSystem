@@ -1,5 +1,7 @@
 package com.team7.appointmentsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,7 @@ public class BusinessImages {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "businessid")
     private Business business;

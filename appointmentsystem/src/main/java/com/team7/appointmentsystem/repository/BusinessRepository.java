@@ -45,7 +45,7 @@ public interface BusinessRepository extends JpaRepository<Business, Long> {
 
 
     @Query(value = "select * from business b where b.businessid= ?1",nativeQuery = true)
-    Business findByBusinessId(Long businessId);
+    Business findByBusinessId(long businessId);
     //  businessdetails
 
     @Query(value = "select * from business b", nativeQuery = true)

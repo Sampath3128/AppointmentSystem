@@ -26,10 +26,10 @@ public class BusinessDetailsServices {
 
     @Autowired
     CommentsRepository commentsRepository;
-    public Business businessOverview(Long businessid){
+    public Business businessOverview(long businessid){
 
         try {
-            Business business = businessRepository.findById(businessid).get();
+            Business business = businessRepository.findByBusinessId(businessid);
 
             return business;
         }
