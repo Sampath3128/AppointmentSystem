@@ -131,7 +131,7 @@ public class UserDashboardServices {
                 userDashboard.Hotels.add(o);
             }
             else {
-                userDashboard.Hotels.add(o);
+                userDashboard.Hospitals.add(o);
             }
 
         }
