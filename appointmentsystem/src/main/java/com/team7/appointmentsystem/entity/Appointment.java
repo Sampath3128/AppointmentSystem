@@ -1,7 +1,8 @@
 package com.team7.appointmentsystem.entity;
 
-import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
@@ -40,6 +41,7 @@ public class Appointment {
     @Column(name = "cancellationreason", columnDefinition = "text default null")
     private String cancellationReason;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "userid")
     private Users users;
@@ -49,6 +51,7 @@ public class Appointment {
     private Business business;
 
     @ManyToOne
+
     @JoinColumn(name = "typeofservice")
     private Services services;
 
