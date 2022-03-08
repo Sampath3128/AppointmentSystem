@@ -22,33 +22,33 @@ public class UserDashboardController {
     @Autowired
     UserDashboardServices userDashboardServices;
 
-    @GetMapping("/login/{userid}/userDashboard")
+    @GetMapping("/{userid}/userDashboard")
     public UserDashboardOverview userDashboard(@PathVariable("userid") Long userid){
         UserDashboardOverview userDashboard= userDashboardServices.userDashboard(userid);
 
         return userDashboard;
     }
 
-    @GetMapping("/login/{userid}/userDashboard/appointments")
+    @GetMapping("/{userid}/userDashboard/appointments")
     public List<TotalAppointments> appointments(@PathVariable long userid){
 
         return userDashboardServices.getAllappointments(userid);
     }
 
 
-    @GetMapping("/login/{userid}/userDashboard/upcoming_appointments")
+    @GetMapping("/{userid}/userDashboard/upcoming_appointments")
     public List<TotalAppointments> upcoming_appointments(@PathVariable long userid){
         return userDashboardServices.getUpcomingAppointments(userid);
     }
 
 
-    @GetMapping("/login/{userid}/userDashboard/comments")
+    @GetMapping("/{userid}/userDashboard/comments")
     public List<Reviews> comments(@PathVariable long userid){
         return userDashboardServices.getAllreviews(userid);
     }
 
 
-    @GetMapping("/login/{userid}/userDashboard/favourites")
+    @GetMapping("/{userid}/userDashboard/favourites")
     public List<Reviews> favourites(@PathVariable long userid){
         return userDashboardServices.getFavourites(userid);
     }

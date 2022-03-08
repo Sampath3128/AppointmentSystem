@@ -56,7 +56,13 @@ public class BusinessDetailsServices {
                 if(tempcId==cId){
                     OtherBusinesses o=new OtherBusinesses();
                     o.businessName=b.getBusinessName();
-                    o.image=b.getBusinessImages().get(0).getImagePath();
+                    if(b.getBusinessImages()!=null && b.getBusinessImages().size()!=0) {
+                        o.image = b.getBusinessImages().get(0).getImagePath();
+                    }
+                    else{
+                        o.image="null images";
+                    }
+
                     o.address=b.getBusinessAddress().getAddressLine2()+b.getBusinessAddress().getCountry();
                     List<Services> services=servicesRepository.findByBusinessBusinessid(b.getBusinessid());
                     int Ratings=0;

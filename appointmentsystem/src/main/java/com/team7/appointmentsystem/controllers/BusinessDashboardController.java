@@ -66,14 +66,14 @@ public class BusinessDashboardController {
 
         return businessDashboardServices.deleteServices(businessid,serviceid);
     }
-    @GetMapping("getB")
-    public List<Business> getB(){
-        return businessRepository.findAll();
+    @GetMapping("{businessid}/getB")
+    public Business getB(@PathVariable long businessid){
+        return businessRepository.findByBusinessId(businessid);
     }
 
 
-    @PostMapping("/profile/uploadPhoto/{businessid}")
-    public ResponseEntity<String> saveProfile(@RequestParam("profileImg") MultipartFile multipartFile, @PathVariable long businessid) throws IOException{
+    @PostMapping("/business/uploadPhoto/{businessid}")
+    public ResponseEntity<String> saveProfile(@RequestParam("businessImg") MultipartFile multipartFile, @PathVariable long businessid) throws IOException{
         return businessDashboardServices.saveProfile(multipartFile,businessid);
     }
 

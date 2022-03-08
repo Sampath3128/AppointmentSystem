@@ -75,7 +75,7 @@ public class BusinessDashboardServices {
                     temp += a.getPayments().getAmount();
                 }
                 else{
-                    temp=-1;
+                    temp=0;
                 }
             }
             businessDashboard.totalEarnings = temp;
@@ -94,7 +94,7 @@ public class BusinessDashboardServices {
                     }
                 }
                 else{
-                    temp=-1;
+                    temp=0;
                 }
             }
             businessDashboard.todaysEarning = temp;
@@ -113,7 +113,7 @@ public class BusinessDashboardServices {
                     }
                 }
                 else{
-                    temp=-1;
+                    temp=0;
                 }
             }
             businessDashboard.yesterdaysEarning = temp;
@@ -137,7 +137,7 @@ public class BusinessDashboardServices {
                     }
                 }
                 else{
-                    temp=-1;
+                    temp=0;
                 }
             }
             businessDashboard.last7daysEarning = temp;
@@ -162,7 +162,7 @@ public class BusinessDashboardServices {
                     }
                 }
                 else{
-                    temp=-1;
+                    temp=0;
                 }
             }
             businessDashboard.last30daysEarning = temp;
@@ -202,6 +202,7 @@ public class BusinessDashboardServices {
 
         }
         catch (Exception e){
+            e.printStackTrace();
             return -1;
         }
 
