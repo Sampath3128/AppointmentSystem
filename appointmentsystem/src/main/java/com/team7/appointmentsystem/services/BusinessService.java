@@ -236,6 +236,7 @@ public class BusinessService {
                 fetchBusiness.setCancellationAvailable(business.isCancellationAvailable());
                 fetchBusiness.setBusinessMobileNumber(business.getBusinessMobileNumber());
                 fetchBusiness.setBusinessTitle(business.getBusinessTitle());
+                fetchBusiness.setGenderCategory(business.getGenderCategory());
                 businessRepository.save(fetchBusiness);
                 return new StrObject("Updated SuccessFully:");
             }
