@@ -1,6 +1,7 @@
 package com.team7.appointmentsystem.models.BusinessDetails;
 
 public class OtherBusinesses {
+    public long businessId;
     public String businessName;
     public String address;
     public String image;
@@ -11,14 +12,7 @@ public class OtherBusinesses {
     public OtherBusinesses() {
     }
 
-    public OtherBusinesses(String businessName, String address, String image, int price, int ratings, String status) {
-        this.businessName = businessName;
-        this.address = address;
-        this.image = image;
-        this.price = price;
-        this.ratings = ratings;
-        this.status = status;
-    }
+
 
     public String getBusinessName() {
         return businessName;
@@ -30,6 +24,24 @@ public class OtherBusinesses {
 
     public String getAddress() {
         return address;
+    }
+
+    public OtherBusinesses(long businessId, String businessName, String address, String image, int price, int ratings, String status) {
+        this.businessId = businessId;
+        this.businessName = businessName;
+        this.address = address;
+        this.image = image;
+        this.price = price;
+        this.ratings = ratings;
+        this.status = status;
+    }
+
+    public long getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(long businessId) {
+        this.businessId = businessId;
     }
 
     public void setAddress(String address) {

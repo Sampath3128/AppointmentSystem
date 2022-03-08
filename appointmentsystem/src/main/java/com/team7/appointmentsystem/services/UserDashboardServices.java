@@ -73,6 +73,7 @@ public class UserDashboardServices {
 
         for(Business b:businesses) {
             OtherBusinesses o=new OtherBusinesses();
+            o.businessId=b.getBusinessid();
             o.businessName=b.getBusinessName();
             //System.out.println(b.getBusinessImages());
             if(b.getBusinessImages()!=null && b.getBusinessImages().size()!=0) {
