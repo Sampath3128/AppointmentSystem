@@ -3,6 +3,7 @@ package com.team7.appointmentsystem.services;
 import com.team7.appointmentsystem.entity.*;
 import com.team7.appointmentsystem.exceptions.*;
 import com.team7.appointmentsystem.miscellinious.BusinessDetails;
+import com.team7.appointmentsystem.models.CommentDetails;
 import com.team7.appointmentsystem.models.StrObject;
 import com.team7.appointmentsystem.repository.*;
 import com.team7.appointmentsystem.resultapis.HomepageAPI1;
@@ -278,13 +279,21 @@ public class BusinessService {
         }
     }
 
-    public List<Comments> getReviews (Long businessId) {
+    public List<CommentDetails> getReviews (Long businessId) {
         try{
             List<Comments> reviews = commentsRepository.findByBusinessBusinessid(businessId);
             if(reviews == null) {
                 throw new NoOneReviewedException("No one has given review to this business");
             }else{
-                return reviews;
+                ArrayList<CommentDetails> commentDetails = new ArrayList<CommentDetails>();
+                for(Comments c: reviews) {
+                    Users tempUser = c.getUsers();
+                    CommentDetails cd = new CommentDetails(tempUser.getFirstName()+tempUser.getLastName(),
+                            tempUser.getProfileImage(), c);
+                    commentDetails.add(cd);
+
+                }
+                return commentDetails;
             }
         }catch (NoOneReviewedException e) {
             logger.error(e.getMessage());

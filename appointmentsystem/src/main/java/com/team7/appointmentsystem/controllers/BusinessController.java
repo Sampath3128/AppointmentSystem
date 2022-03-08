@@ -6,6 +6,7 @@ import com.team7.appointmentsystem.entity.Users;
 import com.team7.appointmentsystem.entity.Visiting;
 import com.team7.appointmentsystem.exceptions.UserNotFoundException;
 import com.team7.appointmentsystem.miscellinious.BusinessDetails;
+import com.team7.appointmentsystem.models.CommentDetails;
 import com.team7.appointmentsystem.models.StrObject;
 import com.team7.appointmentsystem.resultapis.HomepageAPI1;
 import com.team7.appointmentsystem.services.BusinessService;
@@ -112,7 +113,7 @@ public class BusinessController {
     }
 
     @GetMapping("/user/business/{businessId}/getReviews")
-    public ResponseEntity<List<Comments>> getReviews(@PathVariable long businessId) {
+    public ResponseEntity<List<CommentDetails>> getReviews(@PathVariable long businessId) {
         return ResponseEntity.ok(businessService.getReviews(businessId));
     }
 

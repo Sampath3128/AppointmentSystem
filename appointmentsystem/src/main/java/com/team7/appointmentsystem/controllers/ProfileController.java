@@ -49,11 +49,12 @@ public class ProfileController {
         }
         try (InputStream inputStream = multipartFile.getInputStream()) {
             Path filePath = uploadPath.resolve(profileImg);
-            user.setProfileImage(filePath.toFile().getAbsolutePath().toString());
+            user.setProfileImage(filePath.toFile().getAbsolutePath());
             Users savedUser = userRepo.save(user);
 //            System.out.println(filePath.toString());
-//            System.out.println(filePath.toFile().getAbsolutePath().toString());
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println(filePath.toFile().getAbsolutePath());
+            System.out.println(savedUser.getProfileImage());
         }catch (IOException e) {
             throw  new IOException("Could not save uploaded file:" + profileImg);
         }
