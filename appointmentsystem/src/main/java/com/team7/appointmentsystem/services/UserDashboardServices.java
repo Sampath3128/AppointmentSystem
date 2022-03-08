@@ -73,7 +73,7 @@ public class UserDashboardServices {
         for(Business b:businesses) {
             OtherBusinesses o=new OtherBusinesses();
             o.businessName=b.getBusinessName();
-            o.image=b.getBusinessImages();
+            o.image=b.getBusinessImages().get(0).getImagePath();
             o.address=b.getBusinessAddress().getAddressLine2()+b.getBusinessAddress().getCountry();
             List<Services> services=servicesRepository.findByBusinessBusinessid(b.getBusinessid());
             int Ratings=0;
