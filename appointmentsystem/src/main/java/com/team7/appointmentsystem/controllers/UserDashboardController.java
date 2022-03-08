@@ -22,15 +22,12 @@ public class UserDashboardController {
     @Autowired
     UserDashboardServices userDashboardServices;
 
-
-
     @GetMapping("/login/{userid}/userDashboard")
     public UserDashboardOverview userDashboard(@PathVariable("userid") Long userid){
         UserDashboardOverview userDashboard= userDashboardServices.userDashboard(userid);
 
         return userDashboard;
     }
-
 
     @GetMapping("/login/{userid}/userDashboard/appointments")
     public List<TotalAppointments> appointments(@PathVariable long userid){

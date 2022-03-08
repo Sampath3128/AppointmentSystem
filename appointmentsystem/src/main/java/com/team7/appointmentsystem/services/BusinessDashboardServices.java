@@ -25,6 +25,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -194,7 +195,7 @@ public class BusinessDashboardServices {
                 businessRepository.save(business);
                 List<BusinessWorkingHours> l1 = business.getWorkingHours();
                 for (BusinessWorkingHours businessWorkingHours : l1) {
-                    businessWorkingHours.setBusinessHours(business);
+                    businessWorkingHours.setBusiness(business);
                     businessWorkingHoursRepository.save(businessWorkingHours);
                 }
                 return business.getBusinessid();
@@ -210,7 +211,7 @@ public class BusinessDashboardServices {
     {
         String profileImg = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         Business business = businessRepository.findByBusinessId(businessId);
-        business.setBusinessImages(profileImg);
+        business.setBusinessImages();
         Business savedBusiness = businessRepository.save(business);
         String uploadDir = "./profile-image/" + savedBusiness.getBusinessid();
         Path uploadPath = Paths.get(uploadDir);
