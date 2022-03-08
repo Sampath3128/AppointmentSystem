@@ -66,9 +66,9 @@ public class UserDashboardServices {
         favourites=commentsRepository.getFavourites(userid);
         userDashboard.favourites=favourites.size();
 
-        userDashboard.Salooons=new ArrayList<>();
-        userDashboard.Hotels=new ArrayList<>();
-        userDashboard.Hospitals=new ArrayList<>();
+        List<OtherBusinesses> saloons=new ArrayList<>();
+        List<OtherBusinesses> hotels=new ArrayList<>();
+        List<OtherBusinesses> hospitals=new ArrayList<>();
         List<Business> businesses=businessRepository.findAll();
 
         for(Business b:businesses) {
@@ -125,16 +125,20 @@ public class UserDashboardServices {
                 }
             }
             if(b.getCategories().getCategoryId() == 3) {
-                userDashboard.Salooons.add(o);
+                saloons.add(o);
             }
             else if(b.getCategories().getCategoryId() == 2) {
-                userDashboard.Hotels.add(o);
+                hotels.add(o);
             }
             else {
-                userDashboard.Hospitals.add(o);
+               hospitals.add(o);
             }
 
         }
+        //System.out.println(saloons);
+        userDashboard.Saloons=saloons;
+        userDashboard.Hotels=hotels;
+        userDashboard.Hospitals=hospitals;
 
         return userDashboard;
     }

@@ -15,7 +15,9 @@ public class UserDashboardOverview {
     public int upcomingAppointments;
     public int totalReviews;
     public int favourites;
-    public List<OtherBusinesses> Salooons,Hotels,Hospitals;
+    public List<OtherBusinesses> Saloons;
+    public List<OtherBusinesses> Hotels;
+    public List<OtherBusinesses> Hospitals;
 
     public UserDashboardOverview() {
     }
@@ -27,7 +29,7 @@ public class UserDashboardOverview {
         this.upcomingAppointments = upcomingAppointments;
         this.totalReviews = totalReviews;
         this.favourites = favourites;
-        Salooons = salooons;
+        Saloons = salooons;
         Hotels = hotels;
         Hospitals = hospitals;
     }
@@ -81,11 +83,11 @@ public class UserDashboardOverview {
     }
 
     public List<OtherBusinesses> getSalooons() {
-        return Salooons;
+        return Saloons;
     }
 
     public void setSalooons(List<OtherBusinesses> salooons) {
-        Salooons = salooons;
+        Saloons = salooons;
     }
 
     public List<OtherBusinesses> getHotels() {
