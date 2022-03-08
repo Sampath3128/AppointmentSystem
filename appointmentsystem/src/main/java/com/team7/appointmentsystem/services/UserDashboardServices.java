@@ -70,10 +70,17 @@ public class UserDashboardServices {
         userDashboard.Hotels=new ArrayList<>();
         userDashboard.Hospitals=new ArrayList<>();
         List<Business> businesses=businessRepository.findAll();
+
         for(Business b:businesses) {
             OtherBusinesses o=new OtherBusinesses();
             o.businessName=b.getBusinessName();
-            o.image=b.getBusinessImages().get(0).getImagePath();
+            //System.out.println(b.getBusinessImages());
+            if(b.getBusinessImages()!=null && b.getBusinessImages().size()!=0) {
+                o.image = b.getBusinessImages().get(0).getImagePath();
+            }
+            else{
+                o.image="null";
+            }
             o.address=b.getBusinessAddress().getAddressLine2()+b.getBusinessAddress().getCountry();
             List<Services> services=servicesRepository.findByBusinessBusinessid(b.getBusinessid());
             int Ratings=0;
