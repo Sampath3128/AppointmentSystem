@@ -22,5 +22,4 @@ public interface CommentsRepository extends JpaRepository<Comments, Long> {
 
     List<Comments> findByBusinessBusinessid(long businessId);
 
-
 }
