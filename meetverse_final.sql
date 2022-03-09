@@ -198,6 +198,10 @@ create table notifications(
     foreign key (notificationtype) references notificationtypes(id)
 );
 
+alter table notifications add businessid bigint;
+
+alter table notifications add foreign key (businessid) references business(businessid);
+
 create table favourites(
 	id bigint not null auto_increment,
     userid bigint not null,
@@ -286,8 +290,6 @@ select * from notifications;
 select * from gendercategories;
 
 select * from visitings;
-
-alter table users add userrole varchar(50) default "USER";
 
 
 
