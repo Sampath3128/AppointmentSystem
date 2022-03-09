@@ -11,6 +11,9 @@ import com.team7.appointmentsystem.repository.UserRepository;
 import com.team7.appointmentsystem.services.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -47,9 +50,9 @@ public class RegisterUser {
         return ResponseEntity.ok(msg);
     }
 
-    @GetMapping("/login-success")
-    public ResponseEntity<LoggedInUser> loginSuccess(Principal principal, HttpServletResponse response) {
-        Users loggedInUser = userRepository.findByEmail(principal.getName());
+    @GetMapping(value = "/login-success", params = "username")
+    public ResponseEntity<LoggedInUser> loginSuccess(@RequestParam String username) {
+        Users loggedInUser = userRepository.findByEmail(username);
         LoggedInUser user = new LoggedInUser(loggedInUser.getFirstName() + " " + loggedInUser.getLastName()
                 ,loggedInUser.getEmail(), loggedInUser.getUserid(), loggedInUser.getRole() );
         return ResponseEntity.ok(user);

@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -78,17 +79,18 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                     if(authority.getAuthority().equals("USER")) {
                         try {
                             System.out.println("Login Successful...Redirecting");
-                            redirectStrategy.sendRedirect(request, response, "/login-success");
+                            String user = SecurityContextHolder.getContext().getAuthentication().getName();
                             response.getWriter().append("Authentication Success");
                             response.setStatus(200);
+                            redirectStrategy.sendRedirect(request, response, "/login-success?"+"username="+user);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }else if(authority.getAuthority().equals("ADMIN")) {
                         try {
-                            redirectStrategy.sendRedirect(request, response, "/admin");
                             response.getWriter().append("Authentication Success");
                             response.setStatus(200);
+                            redirectStrategy.sendRedirect(request, response, "/admin");
                         } catch (Exception e) {
 
                             e.printStackTrace();
