@@ -229,6 +229,17 @@ public class BusinessService {
                 throw new BusinessNotFoundException("Business does not exist");
             }else {
                 fetchBusiness.setBusinessName( business.getBusinessName() );
+                BusinessAddress formerAddress= businessAddressRepository.getById(fetchBusiness.
+                        getBusinessAddress().getAddressid());
+                BusinessAddress newAddress = business.getBusinessAddress();
+                    formerAddress.setAddressLine1(newAddress.getAddressLine1());
+                    formerAddress.setAddressLine2(newAddress.getAddressLine1());
+                    formerAddress.setLatitude(newAddress.getLatitude());
+                    formerAddress.setLongitude(newAddress.getLongitude());
+                    formerAddress.setPostalCode(newAddress.getPostalCode());
+                    formerAddress.setState(newAddress.getState());
+                    formerAddress.setCountry(newAddress.getCountry());
+                businessAddressRepository.save(formerAddress);
                 fetchBusiness.setBusinessAddress(business.getBusinessAddress());
                 fetchBusiness.setBusinessEmail(business.getBusinessEmail());
                 fetchBusiness.setSlotDuration(business.getSlotDuration());

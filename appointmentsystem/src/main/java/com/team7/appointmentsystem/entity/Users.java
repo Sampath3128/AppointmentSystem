@@ -41,6 +41,32 @@ public class Users {
     @OneToMany(mappedBy = "users", targetEntity = Comments.class)
     private List<Comments> comments;
 
+    @Column(name = "userrole")
+    private String role;
+
+    public Users(long userid, String firstName, String lastName, String email, String userPassword, String mobileNumber, LocalDateTime createdTime, boolean isBlocked, String profileImage, boolean emailVerified, List<Comments> comments, String role) {
+        this.userid = userid;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.userPassword = userPassword;
+        this.mobileNumber = mobileNumber;
+        this.createdTime = createdTime;
+        this.isBlocked = isBlocked;
+        this.profileImage = profileImage;
+        this.emailVerified = emailVerified;
+        this.comments = comments;
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Users(){
 
     }
