@@ -29,4 +29,11 @@ public class NotificationController {
         NotificationsTable userNotifications = notificationService.getNotification(notificationId);
         return ResponseEntity.ok(userNotifications);
     }
+
+    @GetMapping("business/notifications/{businessId}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public ResponseEntity<List<NotificationsTable>> getBusinessNotifications(@PathVariable long businessId){
+        List<NotificationsTable> businessNotifications = notificationService.getBusinessNotifications(businessId);
+        return ResponseEntity.ok(businessNotifications);
+    }
 }

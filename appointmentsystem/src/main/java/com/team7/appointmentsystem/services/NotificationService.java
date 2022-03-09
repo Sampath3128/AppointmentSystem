@@ -35,7 +35,7 @@ public class NotificationService {
 
     public List<NotificationsTable> getUserNotifications(long userId) {
         try{
-            List<NotificationsTable> resultList = notificationsRepository.findBySenderUserid(userId);
+            List<NotificationsTable> resultList = notificationsRepository.findByReceiverUserid(userId);
             return resultList;
         } catch (Exception e) {
             logger.error("Exception occur while fetch Notification by user", e);
@@ -62,6 +62,7 @@ public class NotificationService {
                         appointment.getAppointmentDate(),
                 appointment.getBusiness().getUsers(),
                 appointment.getUsers(),
+                null,
                 false,
                 notificationTypes
         );
@@ -72,6 +73,7 @@ public class NotificationService {
                         appointment.getServices().getServiceName(),
                 appointment.getUsers(),
                 appointment.getBusiness().getUsers(),
+                appointment.getBusiness(),
                 false,
                 notificationTypes
         );
@@ -87,6 +89,7 @@ public class NotificationService {
                        appointment.getAppointmentDate() + " has been cancelled.",
                 appointment.getBusiness().getUsers(),
                 appointment.getUsers(),
+                null,
                 false,
                 notificationTypes
         );
@@ -96,6 +99,7 @@ public class NotificationService {
                         appointment.getAppointmentDate() + " has been cancelled.",
                 appointment.getUsers(),
                 appointment.getBusiness().getUsers(),
+                appointment.getBusiness(),
                 false,
                 notificationTypes
         );
@@ -111,6 +115,7 @@ public class NotificationService {
                         " has been rescheduled to " + appointment.getAppointmentDate() + ".",
                 appointment.getBusiness().getUsers(),
                 appointment.getUsers(),
+                null,
                 false,
                 notificationTypes
         );
@@ -120,6 +125,7 @@ public class NotificationService {
                         " has been rescheduled to " + appointment.getAppointmentDate() + ".",
                 appointment.getUsers(),
                 appointment.getBusiness().getUsers(),
+                appointment.getBusiness(),
                 false,
                 notificationTypes
         );
@@ -135,6 +141,7 @@ public class NotificationService {
                         " has been completed. Please leave a review and comment about our service.",
                 appointment.getBusiness().getUsers(),
                 appointment.getUsers(),
+                null,
                 false,
                 notificationTypes
         );
@@ -144,6 +151,7 @@ public class NotificationService {
                         " for service "+ appointment.getServices().getServiceName() +" has been completed.",
                 appointment.getUsers(),
                 appointment.getBusiness().getUsers(),
+                appointment.getBusiness(),
                 false,
                 notificationTypes
         );
@@ -159,6 +167,7 @@ public class NotificationService {
                         " to " + appointment.getBusiness().getBusinessName()+ " has been successfully completed.",
                 appointment.getBusiness().getUsers(),
                 appointment.getUsers(),
+                null,
                 false,
                 notificationTypes
         );
@@ -169,6 +178,7 @@ public class NotificationService {
                         appointment.getServices().getServiceName() + ".",
                 appointment.getUsers(),
                 appointment.getBusiness().getUsers(),
+                appointment.getBusiness(),
                 false,
                 notificationTypes
         );
@@ -199,9 +209,14 @@ public class NotificationService {
                 "Your business page has been recently visited.",
                 null,
                 business.getUsers(),
+                null,
                 false,
                 notificationTypes
         );
         sendNotification(notificationsTable);
+    }
+
+    public List<NotificationsTable> getBusinessNotifications(long businessId) {
+        return notificationsRepository.findByBusinessBusinessid(businessId);
     }
 }

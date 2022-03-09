@@ -25,6 +25,10 @@ public class NotificationsTable {
     @JoinColumn(name = "receiver")
     private Users receiver;
 
+    @ManyToOne
+    @JoinColumn(name = "businessid")
+    private Business business;
+
     @Column(name = "createdtime")
     private LocalDateTime localDateTime;
 
@@ -39,11 +43,12 @@ public class NotificationsTable {
     }
 
     public NotificationsTable(String header, String message, Users sender, Users receiver,
-                              boolean state, NotificationTypes notificationTypes) {
+                              Business business, boolean state, NotificationTypes notificationTypes) {
         this.header = header;
         this.message = message;
         this.sender = sender;
         this.receiver = receiver;
+        this.business = business;
         this.localDateTime = LocalDateTime.now();
         this.state = state;
         this.notificationTypes = notificationTypes;
@@ -111,5 +116,21 @@ public class NotificationsTable {
 
     public void setNotificationTypes(NotificationTypes notificationTypes) {
         this.notificationTypes = notificationTypes;
+    }
+
+    public Users getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(Users receiver) {
+        this.receiver = receiver;
+    }
+
+    public Business getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Business business) {
+        this.business = business;
     }
 }
