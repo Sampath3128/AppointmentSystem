@@ -11,8 +11,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -24,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 
 @Configuration
 @EnableWebSecurity
@@ -62,12 +66,38 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(daoAuthProvider());
     }
 
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
     private AuthenticationSuccessHandler authSuccessHandler() {
         return new AuthenticationSuccessHandler() {
             @Override
-            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                response.getWriter().append("Authentication Success");
-                response.setStatus(200);
+            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                                Authentication authentication) throws IOException, ServletException {
+                Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+                authorities.forEach(authority -> {
+                    if(authority.getAuthority().equals("USER")) {
+                        try {
+                            System.out.println("Login Successful...Redirecting");
+                            redirectStrategy.sendRedirect(request, response, "/login-success");
+                            response.getWriter().append("Authentication Success");
+                            response.setStatus(200);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }else if(authority.getAuthority().equals("ADMIN")) {
+                        try {
+                            redirectStrategy.sendRedirect(request, response, "/admin");
+                            response.getWriter().append("Authentication Success");
+                            response.setStatus(200);
+                        } catch (Exception e) {
+
+                            e.printStackTrace();
+                        }
+                    } else {
+                        throw new IllegalStateException();
+                    }
+                });
+
             }
         };
     }
