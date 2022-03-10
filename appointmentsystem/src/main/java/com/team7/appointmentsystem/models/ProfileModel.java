@@ -6,25 +6,11 @@ public class ProfileModel {
     private String email;
     private String contact;
 
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
     public ProfileModel(String firstName, String lastName, String email, String contact) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.contact = contact;
-    }
-
-    public ProfileModel(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
     }
 
     public String getFirstName() {
@@ -51,5 +37,11 @@ public class ProfileModel {
         this.email = email;
     }
 
+    public String getContact() {
+        return contact;
+    }
 
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
 }
