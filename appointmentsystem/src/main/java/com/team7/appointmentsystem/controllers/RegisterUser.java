@@ -57,4 +57,10 @@ public class RegisterUser {
                 ,loggedInUser.getEmail(), loggedInUser.getUserid(), loggedInUser.getRole() );
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping("/showUsersNew")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public List<Map<String, Object>> showUsers(){
+        return registerService.showUsers();
+    }
 }
