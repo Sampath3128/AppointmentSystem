@@ -197,7 +197,6 @@ public class Appointment {
                 ", users=" + users +
                 ", business=" + business +
                 ", services=" + services +
-                ", payments=" + payments +
                 '}';
     }
 }
